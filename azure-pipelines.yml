@@ -15,10 +15,6 @@ steps:
     jdkArchitectureOption: x64
     jdkSourceOption: PreInstalled
 
-- task: Maven@4
-  displayName: 'Maven Build'
-  inputs:
-    options: '-B -DskipTests'
 
 - task: SynopsysSecurityScan@1
   inputs:
@@ -27,3 +23,6 @@ steps:
     bridge_polaris_project_name: 'Azure-Webgoat'
     bridge_polaris_assessment_types: 'SAST,SCA'
     bridge_polaris_branch_name: 'Main'
+    polarisAssessmentMode: 'SOURCE_UPLOAD'
+
+        
