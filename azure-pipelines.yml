@@ -1,0 +1,29 @@
+trigger:
+- main
+- develop
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: poc.polaris.synopsys.com
+
+steps:
+- task: JavaToolInstaller@0
+  displayName: 'Use Java 17'
+  inputs:
+    versionSpec: 17
+    jdkArchitectureOption: x64
+    jdkSourceOption: PreInstalled
+
+- task: Maven@4
+  displayName: 'Maven Build'
+  inputs:
+    options: '-B -DskipTests'
+
+- task: SynopsysSecurityScan@1
+  inputs:
+    scanType: 'polaris'
+    bridge_polaris_application_name: 'SH-Demo'
+    bridge_polaris_project_name: 'Azure-Webgoat'
+    bridge_polaris_assessment_types: 'SAST,SCA'
+    bridge_polaris_branch_name: 'Main'
