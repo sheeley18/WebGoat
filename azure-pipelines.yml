@@ -5,15 +5,31 @@
 
 trigger:
 - main
+- develop
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+  - group: poc.polaris.synopsys.com
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+steps:
+- task: JavaToolInstaller@0
+  displayName: 'Use Java 17'
+  inputs:
+    versionSpec: 17
+    jdkArchitectureOption: x64
+    jdkSourceOption: PreInstalled
+- task: Maven@4
+  displayName: 'Maven Build'
+  inputs:
+    options: '-B -DskipTests'
+- task: SynopsysSecurityScan@1
+  inputs:
+    scanType: 'polaris'
+    bridge_polaris_serverUrl: 'https://poc.polaris.synopsys.com'
+    bridge_polaris_accessToken: 'POLARIS_ACCESSTOKEN'
+    bridge_polaris_application_name: 'SH-Demo'
+    bridge_polaris_project_name: 'Azure-Webgoat'
+    bridge_polaris_assessment_types: 'SCA,SAST'
+    bridge_polaris_branch_name: 'Main'
