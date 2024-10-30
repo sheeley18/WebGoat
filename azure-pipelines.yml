@@ -19,6 +19,8 @@ steps:
 - task: SynopsysSecurityScan@1
   inputs:
     scanType: 'polaris'
+    bridge_polaris_accessToken: $(POLARIS_ACCESSTOKEN)
+    bridge_polaris_serverUrl: $(POLARIS_SERVERURL)
     bridge_polaris_application_name: 'SH-Demo'
     bridge_polaris_project_name: 'Azure-Webgoat'
     bridge_polaris_assessment_types: 'SAST,SCA'
