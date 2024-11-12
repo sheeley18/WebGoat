@@ -25,6 +25,5 @@ steps:
     bridge_polaris_project_name: 'Azure-Webgoat'
     bridge_polaris_assessment_types: 'SAST,SCA'
     bridge_polaris_branch_name: 'Main'
-    polarisAssessmentMode: 'SOURCEUPLOAD'
 
         
