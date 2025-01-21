@@ -1,4 +1,4 @@
-analyze:
+nalyze:
   checkers:
     all: false
     audit: false
@@ -8,4 +8,45 @@ analyze:
     default: false
     webapp-security:
       enabled: false
+    checker-config:
+      SIGMA.hardcoded_secret_pattern:
+        enabled: true
+      HARDCODED_CREDENTIALS:
+        enabled: true
+      SIGMA.container_running_as_root:
+        enabled: false
+      SIGMA.excessive_session_lifetime:
+        enabled: false
+      SIGMA.hardcoded_secret:
+        enabled: false
+      SIGMA.insufficient_asymmetric_key_size:
+        enabled: false
+      SIGMA.jwt_ignored_expiration_time:
+        enabled: false
+      SIGMA.jwt_ignored_start_time:
+        enabled: false
+      SIGMA.jwt_no_claims_validation:
+        enabled: false
+      SIGMA.jwt_non_expiring_token:
+        enabled: false
+      SIGMA.jwt_untrusted_decode:
+        enabled: false
+      SIGMA.missing_tls:
+        enabled: false
+      SIGMA.path_manipulation:
+        enabled: false
+      SIGMA.sqli:
+        enabled: false
+      SIGMA.unrestricted_postmessage_target:
+        enabled: false
+      SIGMA.url_manipulation:
+        enabled: false
+      SIGMA.verbose_error_message:
+        enabled: false
+      SIGMA.weak_hash:
+        enabled: false
+      SIGMA.weak_password_hash:
+        enabled: false
+      SIGMA.xml_external_entity_enabled: 
+        enabled: false
   cov-analyze-args: [ --sigma-enable-check-set, default ]
